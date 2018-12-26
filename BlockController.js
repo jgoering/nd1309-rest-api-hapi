@@ -26,7 +26,7 @@ class BlockController {
             method: 'GET',
             path: '/api/block/{index}',
             handler: (request, h) => {
-               
+                return JSON.stringify(this.blocks[request.params.index]).toString();
             }
         });
     }
@@ -35,11 +35,13 @@ class BlockController {
      * Implement a POST Endpoint to add a new Block, url: "/api/block"
      */
     postNewBlock() {
+        let self = this;
         this.server.route({
             method: 'POST',
             path: '/api/block',
             handler: (request, h) => {
-                
+                self.blocks.push(request.payload);
+                return 'body' + JSON.stringify(request.payload);
             }
         });
     }
